@@ -5,9 +5,9 @@ import { apiYoutubePlayList } from '../api/youtube';
 
 function PlayContainer() {
     const [video, setVideo] = useState();
+    let urlYoutube = JSON.parse(sessionStorage.getItem(".config-url"));
 
     useEffect(() => {
-        let urlYoutube = JSON.parse(sessionStorage.getItem(".config-url"));
         switch (urlYoutube.type) {
             case "video":
 
@@ -23,7 +23,7 @@ function PlayContainer() {
     }, [])
 
     return (
-        <Play video={video}></Play>
+        <Play video={video} playlistId={urlYoutube.id}></Play>
     );
 }
 

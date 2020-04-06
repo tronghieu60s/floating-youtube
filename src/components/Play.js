@@ -3,8 +3,13 @@ import React, { useState } from 'react';
 import EmbedVideo from './EmbedVideo';
 import PlayListItem from './PlayListItem';
 
+const electron = window.require('electron');
+
 function Play(props) {
+    var window = electron.remote.getCurrentWindow();
     const [videoRun, setVideoRun] = useState(0);
+    const [floating, setFloating] = useState(false);
+    window.setAlwaysOnTop(floating, "floating");
 
     function renderPlaylistVideo(video) {
         if (!video) return (<p className="ml-2">Đang Load...</p>)
@@ -24,12 +29,16 @@ function Play(props) {
     return (
         <div className="container my-5">
             <div className="row">
-                <EmbedVideo embed={props.video ? props.video.items[videoRun] : null}></EmbedVideo>
+                <EmbedVideo playlistId={props.playlistId} embed={props.video ? props.video.items[videoRun] : null}></EmbedVideo>
                 <div className="col-lg-4">
                     <div className="border mt-4 p-3">
                         <div className="mb-3">
                             <h3 className="text-uppercase mb-0">My playlists: MUSIC</h3>
                             <small className="text-muted">Youtube</small>
+                            <button onClick={()=>{
+                                setFloating(!floating);
+                                alert("Success!");
+                                }} type="button" class={`btn ${floating ? "btn-danger" : "btn-primary" } btn-sm float-right`}>{floating ? "No Floating" : "Floating" }</button>
                         </div>
                         <div className="playlist border mt-2">
                             {renderPlaylistVideo(props.video ? props.video.items : null)}
