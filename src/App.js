@@ -1,15 +1,18 @@
-import React from 'react';
-import Home from './components/Home';
-import Play from './components/Play';
-
-const electron = window.require('electron');
+import React, { useState, useEffect } from 'react';
+import HomeContainer from './container/HomeContainer';
+import PlayContainer from './container/PlayContainer';
 
 function App() {
-  var window = electron.remote.getCurrentWindow();
+  const [urlYoutube, setUrlYoutube] = useState(null);
+  useEffect(() => {
+    setUrlYoutube(sessionStorage.getItem(".config-url"));
+  }, [])
+
   return (
-    <div className="App">
-      <Home></Home>
-      <Play></Play>
+    <div>
+      {urlYoutube ?
+        <PlayContainer></PlayContainer> :
+        <HomeContainer></HomeContainer>}
     </div>
   );
 }
