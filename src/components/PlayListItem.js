@@ -30,7 +30,7 @@ function PlayListItem(props) {
                 <h4 onClick={props.handleSetVideo} className="playlist-video-title">{videoTitle}</h4>
                 <div className="playlist-video-author">{snippet.channelTitle}</div>
             </div>
-            <img className={`playlist-video-delete ${props.videoRun ? " active" : ""}`} src={deleteIcon} alt="" />
+            <img onClick={props.handleDeleteVideo} className={`playlist-video-delete ${props.videoRun ? " active" : ""}`} src={deleteIcon} alt="" />
         </div>
     )
 }

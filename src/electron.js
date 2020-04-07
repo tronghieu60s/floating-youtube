@@ -13,21 +13,30 @@ function createWindow() {
     height: 600,
     maxWidth: 800,
     maxHeight: 600,
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
     }
   });
+
+  mainWindow.webContents.on('new-window', (event, url, frameName, disposition, options) => {
+    event.preventDefault();
+    const win = new BrowserWindow({
+      webContents: options.webContents, // use existing webContents if provided
+      show: false
+    })
+    win.close();
+    electron.shell.openExternal(url);
+  })
 
   const startUrl = process.env.ELECTRON_START_URL || url.format({
     pathname: path.join(__dirname, '/../build/index.html'),
     protocol: 'file:',
     slashes: true
   });
-  if (!process.env.ELECTRON_START_URL)
-    mainWindow.setMenuBarVisibility(false);
-
+  
+  mainWindow.setMenuBarVisibility(false);
   mainWindow.loadURL(startUrl);
-  // mainWindow.setFullScreen(true);
 
   mainWindow.on('closed', function () {
     mainWindow = null

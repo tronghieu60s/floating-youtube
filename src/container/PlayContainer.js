@@ -3,7 +3,7 @@ import Play from '../components/Play';
 
 import { apiYoutubePlayList } from '../api/youtube';
 
-function PlayContainer() {
+function PlayContainer(props) {
     const [video, setVideo] = useState();
     let urlYoutube = JSON.parse(sessionStorage.getItem(".config-url"));
 
@@ -13,8 +13,8 @@ function PlayContainer() {
 
                 break;
             case "playlist":
-                apiYoutubePlayList(urlYoutube.id, 20, (data) => {
-                    setVideo(data);
+                apiYoutubePlayList(urlYoutube.id, 50, (data) => {
+                    setVideo(data.items);
                 })
                 break;
             default:
@@ -22,8 +22,14 @@ function PlayContainer() {
         }
     }, [])
 
+    function handleDeleteVideo(index){
+        let handleVideo = [...video];
+        handleVideo.splice(index, 1);
+        setVideo(handleVideo);
+    }
+
     return (
-        <Play video={video} playlistId={urlYoutube.id}></Play>
+        <Play fullScreen={props.fullScreen} video={video ? video : null} handleDeleteVideo={handleDeleteVideo}></Play>
     );
 }
 
