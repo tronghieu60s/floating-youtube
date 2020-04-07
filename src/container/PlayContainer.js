@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Play from '../components/Play';
 
-import { apiYoutubePlayList } from '../api/youtube';
+import { apiYoutubePlayList, apiYoutubeVideo } from '../api/youtube';
 
 function PlayContainer(props) {
     const [video, setVideo] = useState();
@@ -10,7 +10,11 @@ function PlayContainer(props) {
     useEffect(() => {
         switch (urlYoutube.type) {
             case "video":
-
+                apiYoutubeVideo(urlYoutube.id, (data) => {
+                    let items = [...data.items];
+                    items[0].contentDetails.videoId = items[0].id;
+                    setVideo(items);
+                })
                 break;
             case "playlist":
                 apiYoutubePlayList(urlYoutube.id, 50, (data) => {
@@ -22,14 +26,14 @@ function PlayContainer(props) {
         }
     }, [])
 
-    function handleDeleteVideo(index){
+    function handleDeleteVideo(index) {
         let handleVideo = [...video];
         handleVideo.splice(index, 1);
         setVideo(handleVideo);
     }
 
     return (
-        <Play fullScreen={props.fullScreen} video={video ? video : null} handleDeleteVideo={handleDeleteVideo}></Play>
+        <Play type={urlYoutube.type} fullScreen={props.fullScreen} video={video ? video : null} handleDeleteVideo={handleDeleteVideo}></Play>
     );
 }
 

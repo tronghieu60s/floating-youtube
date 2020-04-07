@@ -19,7 +19,7 @@ function apiYoutubePlayList(playlistId, maxResults, cb) {
         })
 }
 
-function apiYoutubeVideo(id, cb) {
+function apiYoutubeVideoObj(id) {
     return {
         method: 'GET',
         url: "https://www.googleapis.com/youtube/v3/videos",
@@ -30,4 +30,21 @@ function apiYoutubeVideo(id, cb) {
     }
 }
 
-module.exports = { apiYoutubePlayList, apiYoutubeVideo }
+function apiYoutubeVideo(id, cb) {
+    axios({
+        method: 'GET',
+        url: "https://www.googleapis.com/youtube/v3/videos",
+        params: {
+            key: API_KEY,
+            part: "contentDetails", id
+        }
+    })
+        .then(function (response) {
+            cb(response.data);
+        })
+        .catch(function (error) {
+            console.log(error);
+        })
+}
+
+module.exports = { apiYoutubePlayList, apiYoutubeVideo, apiYoutubeVideoObj }

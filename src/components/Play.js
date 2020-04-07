@@ -40,7 +40,7 @@ function Play(props) {
                 <div className="col-lg-4">
                     <div className="border mt-4 p-3">
                         <div className="mb-3">
-                            <h3 className="text-uppercase mb-0">My playlists</h3>
+                            <h3 className="text-uppercase mb-0">My {props.type}</h3>
                             <small className="text-muted">Youtube</small>
                             <button onClick={() => {
                                 setFloating(!floating);
@@ -49,15 +49,16 @@ function Play(props) {
                             <div className="slidecontainer">
                                 <h4 className="mt-3 mb-0">Size Default Play Video.</h4>
                                 <input type="range" min="200" max="640" defaultValue={videoSize} className="slider" id="myRange" onInput={(e) => setVideoSize(e.target.value)} />
-                                <span className="ml-2">{videoSize} x {videoSize * (360 / 640)}</span>
+                                <span className="ml-2">{videoSize} x {(videoSize * (360 / 640)).toFixed(0)}</span>
                             </div>
                         </div>
-                        <div className="playlist border mt-2">
-                            {renderPlaylistVideo(props.video)}
-                        </div>
+                        {props.type === 'playlist' ?
+                            <div className="playlist border mt-2">
+                                {renderPlaylistVideo(props.video)}
+                            </div> : null}
                         <div className="card card-body bg-secondary" style={{ width: '100%', marginTop: '18px' }}>
                             <form method="POST">
-                                <h5 className="text-uppercase">Edit Playlist</h5>
+                                <h5 className="text-uppercase">Edit {props.type}</h5>
                                 <div className="form-wrap my-1">
                                     <input type="text" className="form-control form-control-alternative" placeholder="Paste Your URL..." />
                                     <button type="button" className="btn btn-primary ml-2">OK</button>
