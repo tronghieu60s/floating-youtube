@@ -29,7 +29,7 @@ function Play(props) {
     }
 
     return (
-        <div className="container my-5">
+        <div className="container">
             <div className="row">
                 <EmbedVideo
                     fullScreen={props.fullScreen}

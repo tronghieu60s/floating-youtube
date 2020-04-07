@@ -1,15 +1,35 @@
-@import "https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=vietnamese";
-*{
+@import "https://fonts.googleapis.com/css?family=Montserrat:400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap&subset=vietnamese"; * {
     margin: 0;
     padding: 0;
 }
 
+.move-window {
+    position: absolute;
+    width: 70%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.frame-block:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    top: 0;
+    left: 0;
+    -webkit-app-region: drag;
+    z-index: 5000;
+}
+
 .window-control {
     width: 100%;
+    height: auto;
     position: fixed;
     top: 0;
     right: 0;
-    z-index: 50000;
+    z-index: 1000;
     display: flex;
     justify-content: flex-end;
     padding: 6px;
@@ -65,7 +85,6 @@
     display: block;
 }
 
-
 .playlist-video.active {
     background-color: #ececec;
 }
@@ -90,7 +109,7 @@
     opacity: 1;
 }
 
-.playlist-video-play{
+.playlist-video-play {
     width: 14px;
     margin-right: 10px;
     opacity: .5;
@@ -103,7 +122,7 @@
     width: 70vh;
 }
 
-body{
+body {
     font-family: montserrat,sans-serif;
 }
 
@@ -119,17 +138,17 @@ body::-webkit-scrollbar {
     background-color: #FFFFFF;
 }
 
-.form-center{
+.form-center {
     width: 100vh;
     border-radius: 2px;
     box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
 }
 
-.form-wrap{
+.form-wrap {
     display: flex;
 }
 
-.video-player{
+.video-player {
     display: flex;
     justify-content: center;
 }
@@ -157,29 +176,29 @@ iframe.frame-youtube {
 /* width */
 ::-webkit-scrollbar {
     width: 5px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1;
-  }
-  
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: #888;
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
-  }
+}
 
-  .slidecontainer {
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.slidecontainer {
     width: 100%;
-  }
-  
-  /* The slider itself */
-  .slider {
+}
+
+/* The slider itself */
+.slider {
     -webkit-appearance: none;
     appearance: none;
     width: 50%;
@@ -194,22 +213,22 @@ iframe.frame-youtube {
     opacity: 1;
     -webkit-transition: .2s;
     transition: opacity .2s;
-  }
-  
-  .slider::-webkit-slider-thumb {
+}
+
+.slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 15px; 
+    width: 15px;
     height: 15px;
     border-radius: 50%;
     background: #5e72e4;
     cursor: pointer;
-  }
-  
-  .slider::-moz-range-thumb {
-    width: 15px; 
+}
+
+.slider::-moz-range-thumb {
+    width: 15px;
     height: 15px;
     border-radius: 50%;
     background: #5e72e4;
     cursor: pointer;
-  }
+}

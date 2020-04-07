@@ -5,7 +5,7 @@ import useAxios from 'axios-hooks';
 import { apiYoutubeVideoObj } from '../api/youtube';
 
 function PlayListItem(props) {
-    const [{ data, loading, error }, refetch] = useAxios(apiYoutubeVideoObj(props.item))
+    const [{ data }] = useAxios(apiYoutubeVideoObj(props.item))
     let snippet = data ? data.items[0].snippet : {
         title: "",
         channelTitle: "",

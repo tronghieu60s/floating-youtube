@@ -7,12 +7,12 @@ function EmbedVideo(props) {
     const [fullScreen, setFullScreen] = useState(false);
 
     return (
-        <div className="col-lg-8">
+        <div className={`col-lg-8 ${fullScreen ? "frame-block" : ""}`}>
             <div className="video-player">
-                <div className="video">
+                <div className="video mt-5">
                     {props.embed ? <YouTube
                         videoId={props.embed.contentDetails.videoId}
-                        className={fullScreen ? "frame-youtube" : null}
+                        className={`${fullScreen ? "frame-youtube" : null}`}
                         opts={{
                             playerVars: {
                                 fs: 0,
