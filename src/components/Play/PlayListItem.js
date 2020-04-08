@@ -1,11 +1,11 @@
 import React from 'react';
-import playIcon from '../icons/play.svg';
-import deleteIcon from '../icons/delete.svg';
+import playIcon from '../../icons/play.svg';
+import deleteIcon from '../../icons/delete.svg';
 import useAxios from 'axios-hooks';
-import { apiYoutubeVideoObj } from '../api/youtube';
+import { apiYoutubeVideoObj } from '../../api/youtube';
 
 function PlayListItem(props) {
-    const [{ data }] = useAxios(apiYoutubeVideoObj(props.item))
+    const [{ data }] = useAxios(apiYoutubeVideoObj(props.item));
     let snippet = data ? data.items[0].snippet : {
         title: "",
         channelTitle: "",

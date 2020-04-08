@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import EmbedVideo from './EmbedVideo';
-import PlayListItem from './PlayListItem';
+import EmbedVideo from './Play/EmbedVideo';
+import PlayListItem from './Play/PlayListItem';
+import Controls from './Play/Controls';
 
 function Play(props) {
     const [videoRun, setVideoRun] = useState(0);
     const [videoSize, setVideoSize] = useState(640);
+    const [autoPlay, setAutoPlay] = useState(false);
 
     function renderPlaylistVideo(video) {
         if (!video) return (<p className="ml-2 text-danger">Đang Load...</p>)
@@ -28,33 +30,23 @@ function Play(props) {
                 <EmbedVideo
                     fullScreen={props.fullScreen}
                     videoSize={videoSize}
+                    autoPlay={autoPlay}
                     embed={props.video ? props.video[videoRun >= props.video.length ? setVideoRun(0) : videoRun] : null}
                     onEndVideo={() => setVideoRun(videoRun + 1)}>
                 </EmbedVideo>
-                <div className="col-lg-4">
+                <div className="col-lg-4 mb-5">
                     <div className="border mt-4 p-3">
-                        <div className="mb-3">
-                            <h3 className="text-uppercase mb-0">My {props.type}</h3>
-                            <small className="text-muted">Youtube</small>
-                            <div className="slidecontainer">
-                                <h4 className="mt-3 mb-0">Size Default Play Video.</h4>
-                                <input type="range" min="200" max="640" defaultValue={videoSize} className="slider" id="myRange" onInput={(e) => setVideoSize(e.target.value)} />
-                                <span className="ml-2">{videoSize} x {(videoSize * (360 / 640)).toFixed(0)}</span>
-                            </div>
-                        </div>
+                        <Controls
+                            type={props.type}
+                            videoSize={videoSize}
+                            setVideoSize={(size) => setVideoSize(size)}
+                            autoPlay={autoPlay}
+                            setAutoPlay={(auto) => setAutoPlay(auto)}>
+                        </Controls>
                         {props.type === 'playlist' ?
                             <div className="playlist border mt-2">
                                 {renderPlaylistVideo(props.video)}
                             </div> : null}
-                        <div className="card card-body bg-secondary" style={{ width: '100%', marginTop: '18px' }}>
-                            <form method="POST">
-                                <h5 className="text-uppercase">Edit {props.type}</h5>
-                                <div className="form-wrap my-1">
-                                    <input type="text" className="form-control form-control-alternative" placeholder="Paste Your URL..." />
-                                    <button type="button" className="btn btn-primary ml-2">OK</button>
-                                </div>
-                            </form>
-                        </div>
                     </div>
                 </div>
             </div>

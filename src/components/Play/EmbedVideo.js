@@ -4,6 +4,7 @@ const electron = window.require('electron');
 
 function EmbedVideo(props) {
     var window = electron.remote.getCurrentWindow();
+    let {autoPlay} = props;
     const [fullScreen, setFullScreen] = useState(false);
 
     return (
@@ -16,7 +17,7 @@ function EmbedVideo(props) {
                         opts={{
                             playerVars: {
                                 fs: 0,
-                                // autoplay: 1,
+                                autoplay: autoPlay ? 1 : 0,
                             }
                         }}
                         onPlay={() => {

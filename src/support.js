@@ -6,6 +6,11 @@ function splitUrlYoutube(url, cb) {
     let hostUrl = url.slice(0, begin);
     let id = url.slice(begin + 1, end === -1 ? url.length : end);
     let data;
+    if (url.indexOf("https://youtu.be/") !== -1) {
+        let ytbUrl = "https://youtu.be/";
+        hostUrl = "https://www.youtube.com/watch?v";
+        id = url.slice(ytbUrl.length, url.length);
+    }
     switch (hostUrl) {
         case "https://www.youtube.com/playlist?list":
             data = { type: "playlist", id }

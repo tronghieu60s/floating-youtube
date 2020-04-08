@@ -15,13 +15,13 @@ function ControlContainer() {
             <div className="move-window" style={{ WebkitAppRegion: 'drag' }}></div>
             <div className="window-controls">
                 <button onClick={() => setFloating(!floating)} type="button" className={`btn ${floating ? "btn-warning" : "btn-success"} btn-sm`}>
-                    <img className="icon-controls" src={tabsIcon} />
+                    <img className="icon-controls" src={tabsIcon} alt={tabsIcon}/>
                 </button>
                 <button onClick={() => window.minimize()} type="button" className="btn btn-primary btn-sm">
-                    <img className="icon-controls" src={minimizeIcon} />
+                    <img className="icon-controls" src={minimizeIcon} alt={minimizeIcon}/>
                 </button>
                 <button onClick={() => window.close()} type="button" className="btn btn-danger btn-sm">
-                    <img className="icon-controls" src={closeIcon} />
+                    <img className="icon-controls" src={closeIcon} alt={closeIcon}/>
                 </button>
             </div>
         </div>
