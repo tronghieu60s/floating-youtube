@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+.icon-controls{
+    width: 15px;
+}
+
 .move-window {
     position: absolute;
     width: 70%;

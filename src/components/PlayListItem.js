@@ -1,6 +1,6 @@
 import React from 'react';
-import playIcon from './icons/play.svg';
-import deleteIcon from './icons/delete.svg';
+import playIcon from '../icons/play.svg';
+import deleteIcon from '../icons/delete.svg';
 import useAxios from 'axios-hooks';
 import { apiYoutubeVideoObj } from '../api/youtube';
 

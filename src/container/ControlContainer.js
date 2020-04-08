@@ -1,21 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
+import closeIcon from '../icons/close.svg';
+import minimizeIcon from '../icons/minimize.svg';
+import tabsIcon from '../icons/tabs.svg';
 
 const electron = window.require('electron');
 
 function ControlContainer() {
     var window = electron.remote.getCurrentWindow();
+    const [floating, setFloating] = useState(false);
+    window.setAlwaysOnTop(floating, "floating");
+
     return (
         <div className="window-control">
             <div className="move-window" style={{ WebkitAppRegion: 'drag' }}></div>
             <div className="window-controls">
-                <button  type="button" className="btn btn-success btn-sm">
-                    <i className="fa fa-arrows" aria-hidden="true"></i>
+                <button onClick={() => setFloating(!floating)} type="button" className={`btn ${floating ? "btn-warning" : "btn-success"} btn-sm`}>
+                    <img className="icon-controls" src={tabsIcon} />
                 </button>
                 <button onClick={() => window.minimize()} type="button" className="btn btn-primary btn-sm">
-                    <i className="fa fa-window-minimize" aria-hidden="true"></i>
+                    <img className="icon-controls" src={minimizeIcon} />
                 </button>
                 <button onClick={() => window.close()} type="button" className="btn btn-danger btn-sm">
-                    <i className="fa fa-window-close-o" aria-hidden="true"></i>
+                    <img className="icon-controls" src={closeIcon} />
                 </button>
             </div>
         </div>

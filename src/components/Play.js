@@ -1,16 +1,10 @@
 import React, { useState } from 'react';
-
 import EmbedVideo from './EmbedVideo';
 import PlayListItem from './PlayListItem';
 
-const electron = window.require('electron');
-
 function Play(props) {
-    var window = electron.remote.getCurrentWindow();
     const [videoRun, setVideoRun] = useState(0);
-    const [floating, setFloating] = useState(false);
     const [videoSize, setVideoSize] = useState(640);
-    window.setAlwaysOnTop(floating, "floating");
 
     function renderPlaylistVideo(video) {
         if (!video) return (<p className="ml-2 text-danger">Đang Load...</p>)
@@ -42,10 +36,6 @@ function Play(props) {
                         <div className="mb-3">
                             <h3 className="text-uppercase mb-0">My {props.type}</h3>
                             <small className="text-muted">Youtube</small>
-                            <button onClick={() => {
-                                setFloating(!floating);
-                                alert("Success!");
-                            }} type="button" className={`btn ${floating ? "btn-danger" : "btn-primary"} btn-sm float-right`}>{floating ? "No Floating" : "Floating"}</button>
                             <div className="slidecontainer">
                                 <h4 className="mt-3 mb-0">Size Default Play Video.</h4>
                                 <input type="range" min="200" max="640" defaultValue={videoSize} className="slider" id="myRange" onInput={(e) => setVideoSize(e.target.value)} />
