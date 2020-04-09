@@ -15,19 +15,9 @@ function apiYoutubePlayList(playlistId, maxResults, cb) {
             cb(response.data);
         })
         .catch(function (error) {
-            console.log(error);
+            error = "error";
+            cb(error);
         })
-}
-
-function apiYoutubeVideoObj(id) {
-    return {
-        method: 'GET',
-        url: "https://www.googleapis.com/youtube/v3/videos",
-        params: {
-            key: API_KEY,
-            part: "snippet", id
-        }
-    }
 }
 
 function apiYoutubeVideo(id, cb) {
@@ -45,6 +35,17 @@ function apiYoutubeVideo(id, cb) {
         .catch(function (error) {
             console.log(error);
         })
+}
+
+function apiYoutubeVideoObj(id) {
+    return {
+        method: 'GET',
+        url: "https://www.googleapis.com/youtube/v3/videos",
+        params: {
+            key: API_KEY,
+            part: "snippet", id
+        }
+    }
 }
 
 module.exports = { apiYoutubePlayList, apiYoutubeVideo, apiYoutubeVideoObj }

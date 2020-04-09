@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Home from '../components/Home';
 import { splitUrlYoutube } from '../support';
+import { apiYoutubeVideo, apiYoutubePlayList } from '../api/youtube';
 
 const electron = window.require('electron');
 
@@ -14,16 +15,38 @@ function HomeContainer() {
   const [error, setError] = useState({ status: false, alert: "" });
 
   function handleSubmit() {
-    let history = JSON.parse(localStorage.getItem(".history-url")) || [];
     splitUrlYoutube(urlYoutube, (data) => {
-      if (data.type !== 'error') {
-        sessionStorage.setItem(".config-url", JSON.stringify(data));
-        if (history.length === 5) history.slice(4, 1);
-        history.push(data);
-        localStorage.setItem(".history-url", JSON.stringify(history));
-        window.reload();
-      } else setError({ status: true, alert: "The URL is unknown. Please check again." })
+      switch (data.type) {
+        case "video":
+          apiYoutubeVideo(data.id, (video) =>
+            video.items.length === 0 ?
+              setError({ status: true, alert: "Unable to find this video. Please check again." }) :
+              configDataVideo(data));
+          break;
+        case "playlist":
+          apiYoutubePlayList(data.id, 10, (playlist) =>
+            playlist === "error" ?
+              setError({ status: true, alert: "Unable to find this playlist. Please check again." }) :
+              configDataVideo(data));
+          break;
+        default:
+          setError({ status: true, alert: "The URL is unknown. Please check again." })
+          break;
+      }
     });
+  }
+
+  function configDataVideo(data) {
+    let historyStorage = JSON.parse(localStorage.getItem(".history-url")) || [];
+    sessionStorage.setItem(".config-url", JSON.stringify(data));
+
+    if (historyStorage.indexOf(urlYoutube) === -1) {
+      if (historyStorage.length >= 5)
+        historyStorage = historyStorage.slice(1, 4);
+      historyStorage.push(urlYoutube);
+      localStorage.setItem(".history-url", JSON.stringify(historyStorage));
+    }
+    window.reload();
   }
 
   return (
@@ -32,10 +55,8 @@ function HomeContainer() {
       urlYoutube={urlYoutube}
       history={history}
       handleSubmit={handleSubmit}
-      removeAlert={()=>setError({ status: false, alert: "" })}
-      setUrlYoutube={(index) => setUrlYoutube(history.type === 'video' ?
-        `https://www.youtube.com/watch?v=${history[index].id}` :
-        `https://www.youtube.com/playlist?list=${history[index].id}`)}
+      removeAlert={() => setError({ status: false, alert: "" })}
+      setUrlYoutube={(index) => setUrlYoutube(history[index])}
       onChange={(event) => setUrlYoutube(event.target.value)}>
     </Home>
   );

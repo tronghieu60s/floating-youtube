@@ -22,10 +22,10 @@ function Home(props) {
         <div className="wrap">
             <div className="form-center p-4 bg-secondary ">
                 <h2 className="text-center mb-3">Floating for YouTube</h2>
-                {props.error.status ? <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button onClick={props.removeAlert} type="button" class="close">
+                {props.error.status ? <div className="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button onClick={props.removeAlert} type="button" className="close">
                         <span aria-hidden="true">&times;</span>
-                        <span class="sr-only">Close</span>
+                        <span className="sr-only">Close</span>
                     </button>
                     <strong>{props.error.alert}</strong>
                 </div> : null}
@@ -36,10 +36,11 @@ function Home(props) {
                     </div>
                 </form>
                 <small className="text-muted">Paste youtube url (or youtube playlist) here.</small>
-                <div className="mt-3">
-                    <h4 className="text-uppercase">History:</h4>
-                    {renderHistories(props.history)}
-                </div>
+                {props.history.length !== 0 ?
+                    <div className="mt-3">
+                        <h4 className="text-uppercase">History:</h4>
+                        {renderHistories(props.history)}
+                    </div> : null}
             </div>
         </div>
     );
