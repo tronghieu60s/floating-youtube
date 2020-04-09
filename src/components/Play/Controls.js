@@ -22,15 +22,18 @@ function Controls(props) {
                         <span className="ml-2">{videoSize} x {(videoSize * (360 / 640)).toFixed(0)}</span>
                     </div>
                 </div>
-                {props.type !== "video" ? <div className="col-sm-4">
+                <div className="col-sm-4">
                     <div className="controls-toggles">
                         <h3 className="mr-2">Autoplay:</h3>
                         <label className="custom-toggle">
-                            <input type="checkbox" onChange={() => props.setAutoPlay(!autoPlay)} checked={autoPlay} />
+                            <input type="checkbox" onChange={() => {
+                                props.setAutoPlay(!autoPlay);
+                                localStorage.setItem(".config-st", JSON.stringify({autoplay: !autoPlay}))
+                                }} checked={autoPlay} />
                             <span className="custom-toggle-slider rounded-circle" data-label-off="No" data-label-on="Yes"></span>
                         </label>
                     </div>
-                </div> : null}
+                </div>
             </div>
         </div>
     )

@@ -42,7 +42,7 @@ function HomeContainer() {
 
     if (historyStorage.indexOf(urlYoutube) === -1) {
       if (historyStorage.length >= 5)
-        historyStorage = historyStorage.slice(1, 4);
+        historyStorage = historyStorage.slice(1);
       historyStorage.push(urlYoutube);
       localStorage.setItem(".history-url", JSON.stringify(historyStorage));
     }

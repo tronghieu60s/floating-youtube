@@ -1,6 +1,7 @@
 const electron = require('electron');
 const app = electron.app;
 const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu;
 
 const path = require('path');
 const url = require('url');
@@ -34,8 +35,9 @@ function createWindow() {
     protocol: 'file:',
     slashes: true
   });
-  
-  mainWindow.setMenuBarVisibility(false);
+
+  if (!process.env.ELECTRON_START_URL)
+    Menu.setApplicationMenu(null);
   mainWindow.loadURL(startUrl);
 
   mainWindow.on('closed', function () {

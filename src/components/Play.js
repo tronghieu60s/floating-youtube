@@ -6,7 +6,10 @@ import Controls from './Play/Controls';
 function Play(props) {
     const [videoRun, setVideoRun] = useState(0);
     const [videoSize, setVideoSize] = useState(640);
-    const [autoPlay, setAutoPlay] = useState(false);
+    const [autoPlay, setAutoPlay] = useState(() => {
+        let st = JSON.parse(localStorage.getItem(".config-st")) || { autoplay: false };
+        return st.autoplay;
+    });
 
     function renderPlaylistVideo(video) {
         if (!video) return (<p className="ml-2 text-danger">Đang Load...</p>)
