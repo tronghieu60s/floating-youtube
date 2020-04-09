@@ -4,8 +4,14 @@ const electron = window.require('electron');
 
 function EmbedVideo(props) {
     var window = electron.remote.getCurrentWindow();
-    let {autoPlay} = props;
+    let { autoPlay } = props;
     const [fullScreen, setFullScreen] = useState(false);
+    const opts = {
+        playerVars: {
+            fs: 0,
+            autoplay: autoPlay ? 1 : 0,
+        }
+    }
 
     return (
         <div className={`col-lg-8 ${fullScreen ? "frame-block" : ""}`}>
@@ -14,12 +20,7 @@ function EmbedVideo(props) {
                     {props.embed ? <YouTube
                         videoId={props.embed.contentDetails.videoId}
                         className={`${fullScreen ? "frame-youtube" : null}`}
-                        opts={{
-                            playerVars: {
-                                fs: 0,
-                                autoplay: autoPlay ? 1 : 0,
-                            }
-                        }}
+                        opts={opts}
                         onPlay={() => {
                             let videoSizeWidth = parseInt(props.videoSize);
                             let videoSizeHeight = parseInt((videoSizeWidth * (360 / 640)).toFixed(0));
