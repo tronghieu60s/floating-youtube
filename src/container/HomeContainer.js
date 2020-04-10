@@ -21,13 +21,13 @@ function HomeContainer() {
           apiYoutubeVideo(data.id, (video) =>
             video.items.length === 0 ?
               setError({ status: true, alert: "Unable to find this video. Please check again." }) :
-              configDataVideo(data));
+              configDataVideo(data, data.type));
           break;
         case "playlist":
           apiYoutubePlayList(data.id, 10, (playlist) =>
             playlist === "error" ?
               setError({ status: true, alert: "Unable to find this playlist. Please check again." }) :
-              configDataVideo(data));
+              configDataVideo(data, data.type));
           break;
         default:
           setError({ status: true, alert: "The URL is unknown. Please check again." })
@@ -36,14 +36,14 @@ function HomeContainer() {
     });
   }
 
-  function configDataVideo(data) {
+  function configDataVideo(data, type) {
     let historyStorage = JSON.parse(localStorage.getItem(".history-url")) || [];
     sessionStorage.setItem(".config-url", JSON.stringify(data));
 
     if (historyStorage.indexOf(urlYoutube) === -1) {
       if (historyStorage.length >= 5)
         historyStorage = historyStorage.slice(1);
-      historyStorage.push(urlYoutube);
+      historyStorage.push({videoURL: urlYoutube, type});
       localStorage.setItem(".history-url", JSON.stringify(historyStorage));
     }
     window.reload();

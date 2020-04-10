@@ -12,7 +12,10 @@ function Home(props) {
         let result = null;
         result = histories.map((history, index) => {
             return (
-                <History setUrlYoutube={() => props.setUrlYoutube(index)} key={index} history={history}></History>
+                <History 
+                setUrlYoutube={() => props.setUrlYoutube(index)} 
+                key={index} history={history}>
+                </History>
             )
         })
         return result;
