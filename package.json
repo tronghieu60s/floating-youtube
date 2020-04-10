@@ -23,6 +23,11 @@
     "pack": "electron-builder --dir",
     "dist": "npm run build && electron-builder"
   },
+  "build": {
+    "win": {
+      "icon": "public/logo.png"
+    }
+  },
   "eslintConfig": {
     "extends": null
   },
