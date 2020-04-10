@@ -56,7 +56,7 @@ function HomeContainer() {
       history={history}
       handleSubmit={handleSubmit}
       removeAlert={() => setError({ status: false, alert: "" })}
-      setUrlYoutube={(index) => setUrlYoutube(history[index])}
+      setUrlYoutube={(index) => setUrlYoutube(history[index].videoURL)}
       onChange={(event) => setUrlYoutube(event.target.value)}>
     </Home>
   );
