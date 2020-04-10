@@ -8,6 +8,8 @@ Floating Youtube. Desktop App with Electron Js.
   - ReactJS
   - Axios
 
+![alt text](https://i.imgur.com/I5y4GT7.png)
+
 ### Installation
 
 ncov-crawler-api requires [Node.js](https://nodejs.org/) v4+ to run.
