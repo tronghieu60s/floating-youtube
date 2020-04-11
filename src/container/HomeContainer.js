@@ -40,7 +40,7 @@ function HomeContainer() {
     let historyStorage = JSON.parse(localStorage.getItem(".history-url")) || [];
     sessionStorage.setItem(".config-url", JSON.stringify(data));
 
-    if (historyStorage.indexOf(urlYoutube) === -1) {
+    if (historyStorage.map((e)=> e.videoURL).indexOf(urlYoutube) === -1) {
       if (historyStorage.length >= 5)
         historyStorage = historyStorage.slice(1);
       historyStorage.push({videoURL: urlYoutube, type});
