@@ -3,7 +3,7 @@ import React from 'react';
 function History(props) {
     
     return (
-        <div style={{ fontSize: '13px' }}>
+        <div style={{ fontSize: '13px', marginTop: '2px' }}>
             <span className="ml-3 text-capitalize">- {props.history.type}: </span>
             <span onClick={props.setUrlYoutube} style={{ cursor: 'pointer', color: '#5e72e4' }}>
             {props.history.videoURL}

@@ -23,7 +23,7 @@ function Home(props) {
 
     return (
         <div className="wrap">
-            <div className="form-center p-4 bg-secondary ">
+            <div className="form-center p-4">
                 <h2 className="text-center mb-3">Floating for YouTube</h2>
                 {props.error.status ? <div className="alert alert-danger alert-dismissible fade show" role="alert">
                     <button onClick={props.removeAlert} type="button" className="close">

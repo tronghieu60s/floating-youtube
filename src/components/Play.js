@@ -4,12 +4,10 @@ import PlayListItem from './Play/PlayListItem';
 import Controls from './Play/Controls';
 
 function Play(props) {
+    let st = JSON.parse(localStorage.getItem(".config-st")) || {};
     const [videoRun, setVideoRun] = useState(0);
     const [videoSize, setVideoSize] = useState(640);
-    const [autoPlay, setAutoPlay] = useState(() => {
-        let st = JSON.parse(localStorage.getItem(".config-st")) || { autoplay: false };
-        return st.autoplay;
-    });
+    const [autoPlay, setAutoPlay] = useState(() => st.autoPlay || false);
 
     function renderPlaylistVideo(video) {
         if (!video) return (<p className="ml-2 text-danger">Đang Load...</p>)
@@ -38,16 +36,20 @@ function Play(props) {
                     onEndVideo={() => setVideoRun(videoRun + 1)}>
                 </EmbedVideo>
                 <div className="col-lg-4 mb-5">
-                    <div className="border mt-4 p-3">
+                    <div className="block-controls mt-4 p-3">
                         <Controls
                             type={props.type}
                             videoSize={videoSize}
                             setVideoSize={(size) => setVideoSize(size)}
                             autoPlay={autoPlay}
-                            setAutoPlay={(auto) => setAutoPlay(auto)}>
+                            setAutoPlay={(auto) => {
+                                setAutoPlay(auto);
+                                st['autoPlay'] = auto;
+                                localStorage.setItem(".config-st", JSON.stringify(st));
+                            }}>
                         </Controls>
                         {props.type === 'playlist' ?
-                            <div className="playlist border mt-2">
+                            <div className="playlist mt-2">
                                 {renderPlaylistVideo(props.video)}
                             </div> : null}
                     </div>
