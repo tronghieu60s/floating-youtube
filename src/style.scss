@@ -1,0 +1,220 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: montserrat,sans-serif;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+.wrap {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFFFF;
+}
+
+// ScrollBar
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+// Playlist
+.playlist {
+    height: 500px;
+    overflow: scroll;
+    overflow-x: hidden;
+    &-video {
+        display: flex;
+        align-items: center;
+        height: 78px;
+        margin: 8px;
+        padding: 7px 19px;
+        cursor: pointer;
+        position: relative;
+        transition: ease-in-out .2s;
+        &:hover {
+             background-color: #ececec;
+            .playlist-video-delete {
+                display: block;
+            }
+            .playlist-video-title {
+                color: #5e72e4;
+            }
+        }
+        img {
+            height: 100%;
+        }
+        &.active {
+            background-color: #ececec;
+            .playlist-video-title {
+                color: #5e72e4;
+            }
+        }
+        &-img {
+            min-width: 115px;
+            height: 100%;
+            position: relative;
+            background-size: cover;
+        }
+        &-author {
+            font-size: .8em;
+        }
+        &-title {
+            width: 70%;
+            margin-bottom: 0;
+        }
+        &-video-content {
+            margin-left: 9px;
+        }
+        &-delete{
+            &.active {
+                display: block;
+            }
+            &:hover {
+                opacity: 1;
+            }
+        }
+        &-delete {
+            width: 20px;
+            position: absolute;
+            right: 3%;
+            opacity: .5;
+            display: none;
+        }
+        &-play {
+            width: 14px;
+            margin-right: 10px;
+            opacity: .5;
+        }
+    }
+}
+
+// Slide
+.slidecontainer {
+    width: 100%;
+    .slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 50%;
+        height: 5px;
+        background: #eceeef;
+        box-shadow: inset 0 1px 2px rgba(90,97,105,.1);
+        margin: 15px 0;
+        cursor: pointer;
+        border: 0;
+        border-radius: 5px;
+        outline: none;
+        opacity: 1;
+        -webkit-transition: .2s;
+        transition: opacity .2s;
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #5e72e4;
+            cursor: pointer;
+        }
+        &::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #5e72e4;
+            cursor: pointer;
+        }
+    }
+}
+
+//Style Responsive Video Ytb and FullScreen
+.video {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%;
+    &-player {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    &.frame-youtube {
+        position: fixed;
+        z-index: 1000;
+    }
+}
+
+// ControlBar
+.controls-window {
+    width: 100%;
+    height: auto;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 5000;
+    display: flex;
+    justify-content: flex-end;
+    padding: 6px;
+    background: linear-gradient(to right, #536976, #292e49);
+    &-move {
+        position: absolute;
+        width: 70%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+    &-icon{
+        width: 15px;
+    }
+}
+
+//Custom Argon Css
+.controls-toggles{
+    display: flex;
+    transform: scale(.85);
+}
+
+.frame-block:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 30%;
+    top: 0;
+    left: 0;
+    -webkit-app-region: drag;
+    z-index: 5000;
+}
+
+.form-center {
+    width: 100vh;
+    border-radius: 2px;
+    box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+}
+
+.form-wrap {
+    display: flex;
+}

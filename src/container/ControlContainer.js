@@ -11,17 +11,17 @@ function ControlContainer() {
     window.setAlwaysOnTop(floating, "floating");
 
     return (
-        <div className="window-control">
-            <div className="move-window" style={{ WebkitAppRegion: 'drag' }}></div>
-            <div className="window-controls">
+        <div className="controls-window">
+            <div className="controls-window-move" style={{ WebkitAppRegion: 'drag' }}></div>
+            <div>
                 <button onClick={() => setFloating(!floating)} type="button" className={`btn ${floating ? "btn-warning" : "btn-success"} btn-sm`}>
-                    <img className="icon-controls" src={tabsIcon} alt={tabsIcon}/>
+                    <img className="controls-window-icon" src={tabsIcon} alt={tabsIcon}/>
                 </button>
                 <button onClick={() => window.minimize()} type="button" className="btn btn-primary btn-sm">
-                    <img className="icon-controls" src={minimizeIcon} alt={minimizeIcon}/>
+                    <img className="controls-window-icon" src={minimizeIcon} alt={minimizeIcon}/>
                 </button>
                 <button onClick={() => window.close()} type="button" className="btn btn-danger btn-sm">
-                    <img className="icon-controls" src={closeIcon} alt={closeIcon}/>
+                    <img className="controls-window-icon" src={closeIcon} alt={closeIcon}/>
                 </button>
             </div>
         </div>

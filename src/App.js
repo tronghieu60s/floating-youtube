@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './style.scss';
 import HomeContainer from './container/HomeContainer';
 import PlayContainer from './container/PlayContainer';
 import ControlContainer from './container/ControlContainer';
