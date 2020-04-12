@@ -8,11 +8,12 @@ import tabsIcon from '../icons/tabs.svg';
 const electron = window.require('electron');
 
 function ControlContainer(props) {
+    let st = JSON.parse(localStorage.getItem(".config-st")) || {};
     let window = electron.remote.getCurrentWindow();
     const { dialog } = electron.remote;
 
     let { darkMode } = props;
-    const [floating, setFloating] = useState(false);
+    const [floating, setFloating] = useState(() => st.floating || false);
     window.setAlwaysOnTop(floating, "floating");
 
     return (
@@ -22,7 +23,11 @@ function ControlContainer(props) {
                 <button onClick={() => props.setDarkMode(!darkMode)} type="button" className={`btn ${darkMode ? "btn-dark" : "btn-light"} btn-sm`}>
                     <img className="controls-window-icon" src={darkMode ? darkIcon : lightIcon} alt={darkMode ? darkIcon : lightIcon} />
                 </button>
-                <button onClick={() => setFloating(!floating)} type="button" className={`btn ${floating ? "btn-warning" : "btn-success"} btn-sm`}>
+                <button onClick={() => {
+                    setFloating(!floating);
+                    st['floating'] = !floating;
+                    localStorage.setItem(".config-st", JSON.stringify(st));
+                }} type="button" className={`btn ${floating ? "btn-warning" : "btn-success"} btn-sm`}>
                     <img className="controls-window-icon" src={tabsIcon} alt={tabsIcon} />
                 </button>
                 <button onClick={() => window.minimize()} type="button" className="btn btn-primary btn-sm">
@@ -37,7 +42,7 @@ function ControlContainer(props) {
                     }
                     let response = dialog.showMessageBox(options)
                     response.then(res => {
-                        if(res.response === 0) window.close();
+                        if (res.response === 0) window.close();
                     })
                 }} type="button" className="btn btn-danger btn-sm">
                     <img className="controls-window-icon" src={closeIcon} alt={closeIcon} />
