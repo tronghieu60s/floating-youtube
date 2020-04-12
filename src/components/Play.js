@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import Controls from './Play/Controls';
 import EmbedVideo from './Play/EmbedVideo';
 import PlayListItem from './Play/PlayListItem';
-import Controls from './Play/Controls';
 
 function Play(props) {
     let st = JSON.parse(localStorage.getItem(".config-st")) || {};

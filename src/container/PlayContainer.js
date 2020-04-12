@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { apiYoutubePlayList, apiYoutubeVideo } from '../api/youtube';
 import Play from '../components/Play';
 
-import { apiYoutubePlayList, apiYoutubeVideo } from '../api/youtube';
 
 function PlayContainer(props) {
     const [video, setVideo] = useState();

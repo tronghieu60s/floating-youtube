@@ -1,8 +1,8 @@
-import React from 'react';
-import playIcon from '../../icons/play.svg';
-import deleteIcon from '../../icons/delete.svg';
 import useAxios from 'axios-hooks';
+import React from 'react';
 import { apiYoutubeVideoObj } from '../../api/youtube';
+import deleteIcon from '../../icons/delete.svg';
+import playIcon from '../../icons/play.svg';
 
 function PlayListItem(props) {
     const [{ data }] = useAxios(apiYoutubeVideoObj(props.item));

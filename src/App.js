@@ -5,6 +5,7 @@ import { DarkMode, LightMode } from './Theme';
 import HomeContainer from './container/HomeContainer';
 import PlayContainer from './container/PlayContainer';
 import ControlContainer from './container/ControlContainer';
+import WelcomeContainer from './container/WelcomeContainer';
 
 function App() {
   let st = JSON.parse(localStorage.getItem(".config-st")) || {};
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <div>
+      <WelcomeContainer></WelcomeContainer>
       {darkMode ? <DarkMode></DarkMode> : <LightMode></LightMode>}
       {!fullScreen ? <ControlContainer
         darkMode={darkMode}
@@ -27,6 +29,8 @@ function App() {
           localStorage.setItem(".config-st", JSON.stringify(st));
         }}>
       </ControlContainer> : null}
+
+      {/* Container Page */}
       {urlYoutube ?
         <PlayContainer fullScreen={(status) => setFullScreen(status)}></PlayContainer> :
         <HomeContainer></HomeContainer>}

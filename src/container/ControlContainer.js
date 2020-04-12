@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import closeIcon from '../icons/close.svg';
+import darkIcon from '../icons/dark.svg';
+import lightIcon from '../icons/light.svg';
 import minimizeIcon from '../icons/minimize.svg';
 import tabsIcon from '../icons/tabs.svg';
-import darkIcon from '../icons/dark.svg'
-import lightIcon from '../icons/light.svg'
 
 const electron = window.require('electron');
 

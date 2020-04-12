@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import { apiYoutubePlayList, apiYoutubeVideo } from '../api/youtube';
 import Home from '../components/Home';
 import { splitUrlYoutube } from '../support';
-import { apiYoutubeVideo, apiYoutubePlayList } from '../api/youtube';
 
 const electron = window.require('electron');
 
