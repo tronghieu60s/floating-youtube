@@ -35,7 +35,7 @@ function ControlContainer(props) {
                 </button>
                 <button onClick={() => {
                     setFloating(false);
-                    st['floating'] = !floating;
+                    st['floating'] = false;
                     localStorage.setItem(".config-st", JSON.stringify(st));
                     
                     let options = {
