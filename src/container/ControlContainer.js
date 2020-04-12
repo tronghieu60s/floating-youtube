@@ -34,6 +34,10 @@ function ControlContainer(props) {
                     <img className="controls-window-icon" src={minimizeIcon} alt={minimizeIcon} />
                 </button>
                 <button onClick={() => {
+                    setFloating(false);
+                    st['floating'] = !floating;
+                    localStorage.setItem(".config-st", JSON.stringify(st));
+                    
                     let options = {
                         type: "warning",
                         title: "Floating Youtube",
